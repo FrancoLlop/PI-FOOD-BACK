@@ -20,10 +20,13 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const {getDiets} = require('./src/controllers/diets.js')
+require('dotenv').config()
+const port = process.env.PORT || 3001
+
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, async () => {
+  server.listen(port, async () => {
     await getDiets()
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+    console.log(`%s listening at ${port}`); // eslint-disable-line no-console
   });
 });
